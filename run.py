@@ -7,7 +7,7 @@ from aiogram import Bot, Dispatcher, F
 from aiogram.types import (Message, ReplyKeyboardMarkup, KeyboardButton)
 from aiogram.filters import CommandStart, Command
 
-from card_random import get_random_cards
+from cards_random import get_random_cards
 from API import get_gpt_interpretation
 from cards import init_db
 
@@ -28,6 +28,9 @@ keyboard = ReplyKeyboardMarkup(keyboard=[
 
 @dp.message(CommandStart())
 async def cmd_start(message: Message):
+    """
+    Handles the /start command, sending a welcome message and instructions.
+    """
     await message.answer(
         f'Привет! Я твой персональный таролог,'
         f'узнай свлою судьбу! Чтобы получить расклад трех карт таро и'
@@ -39,6 +42,10 @@ async def cmd_start(message: Message):
 @dp.message(Command('tarot'))
 @dp.message(F.text == 'Получить расклад')
 async def send_tarot_card(message: Message):
+    """
+    Handles the /tarot command or button press,
+    sending a Tarot card spread and its interpretation.
+    """
     try:
         jpt = await get_random_cards(message)
 
@@ -50,6 +57,9 @@ async def send_tarot_card(message: Message):
 
 
 async def main():
+    """
+    Starts the bot and begins polling for messages.
+    """
     await dp.start_polling(bot)
 
 

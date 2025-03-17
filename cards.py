@@ -2,6 +2,10 @@ import sqlite3
 
 
 def init_db():
+    """
+    Initializes the database, creating tables
+    and inserting cards if they don't exist.
+    """
     with sqlite3.connect('tarocards.db') as connection:
         create_tables(connection)
 
@@ -9,7 +13,15 @@ def init_db():
         insert_cards(connection, 'new_cards', tarot_cards_jr)
 
 
-def insert_cards(connection, table_name, cards):
+def insert_cards(connection, table_name: str, cards: list[tuple[str, str, str]]):
+    """
+    Inserts cards into the specified table if they don't already exist.
+
+    Args:
+        connection (sqlite3.Connection): The database connection.
+        table_name (str): The name of the table to insert into.
+        cards (list[tuple[str, str, str]]): List of card tuples (name, description, url).
+    """
     with connection:
         cursor = connection.cursor()
         for card in cards:
@@ -23,6 +35,12 @@ def insert_cards(connection, table_name, cards):
 
 
 def create_tables(connection):
+    """
+    Creates the necessary tables in the database if they don't exist.
+
+    Args:
+        connection (sqlite3.Connection): The database connection.
+    """
     with connection:
         cursor = connection.cursor()
         cursor.execute('''

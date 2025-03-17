@@ -9,7 +9,19 @@ YANDEX_API = os.getenv('YANDEX_API_KEY')
 YANDEX_MODEL = os.getenv('YANDEX_MODEL')
 
 
-async def get_gpt_interpretation(cards):
+async def get_gpt_interpretation(cards: list[str]) -> str:
+    """
+       Fetches a GPT-based interpretation of a Tarot card spread from Yandex API.
+
+       Args:
+           cards (list[str]): List of card names to interpret.
+
+       Returns:
+           str: The interpretation text.
+
+       Raises:
+           Exception: If the API request fails.
+       """
     prompt = {
         "modelUri": f"{YANDEX_MODEL}",
         "completionOptions": {

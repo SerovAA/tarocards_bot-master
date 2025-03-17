@@ -1,4 +1,4 @@
-### Telegram tarolog bot
+### Telegram tarolog bot 
 
 <p>Telegram bot который раскладывает три карты таро и дает предсказание, используя нейросеть</p>  
 
@@ -6,6 +6,4 @@
 - `API нейросети`
 - `Токен телеграм бота`
 
-
-
-
+####  Сылка на бот `https://t.me/test_taro_py_bot`
